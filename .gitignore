@@ -1,0 +1,28 @@
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+.vscode/
+.vs/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.angulardoc.json
+
+# misc
+.angulardoc.json
+
+# System Files
+.DS_Store
+Thumbs.db
+
+/.vs
+obj/
