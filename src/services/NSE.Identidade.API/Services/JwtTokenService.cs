@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NSE.Core.Extensions;
-using NSE.Identidade.API.Configuration;
 using NSE.Identidade.API.Models;
+using NSE.WebAPI.Core.Identidade;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -28,6 +28,7 @@ namespace NSE.Identidade.API.Services
 
             var tokenSecurity = tokenHandler.CreateToken(new SecurityTokenDescriptor
             {
+                Audience = _identityConfiguration.ValidoEm,
                 Issuer = _identityConfiguration.Emissor,
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(_identityConfiguration.ExpiracaoHoras),
@@ -64,11 +65,6 @@ namespace NSE.Identidade.API.Services
             foreach (var role in roles)
             {
                 claims.Add(new Claim("role", role));
-            }
-
-            foreach (var audience in _identityConfiguration.ValidoEm)
-            {
-                claims.Add(new Claim(JwtRegisteredClaimNames.Aud, audience));
             }
 
             return claims;

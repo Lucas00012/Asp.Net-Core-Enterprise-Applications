@@ -4,6 +4,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>IIS Express - Development</ActiveDebugProfile>
+    <ActiveDebugProfile>NSE.Identidade.API</ActiveDebugProfile>
   </PropertyGroup>
 </Project>

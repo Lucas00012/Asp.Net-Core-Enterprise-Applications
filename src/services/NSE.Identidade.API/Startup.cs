@@ -1,4 +1,4 @@
-﻿using NSE.Identidade.API.Extensions;
+﻿using NSE.Identidade.API.Infrastructure.StartupConfig;
 
 namespace NSE.Identidade.API
 {

@@ -6,13 +6,6 @@ namespace NSE.WebApp.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -23,10 +16,47 @@ namespace NSE.WebApp.MVC.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("sistema-indisponivel")]
+        public IActionResult SistemaIndisponivel()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var modelErro = new ErrorViewModel
+            {
+                Mensagem = "O sistema está temporariamente indisponível, isto pode ocorrer em momentos de sobrecarga de usuários.",
+                Titulo = "Sistema indisponível.",
+                ErroCode = 500
+            };
+
+            return View("Error", modelErro);
+        }
+
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Error(int id)
+        {
+            return id switch
+            {
+                500 => View("Error", new ErrorViewModel
+                {
+                    Mensagem = "Ocorreu um erro! Tente novamente mais tarde ou contate nosso suporte.",
+                    Titulo = "Ocorreu um erro!",
+                    ErroCode = id,
+                }),
+
+                404 => View("Error", new ErrorViewModel
+                {
+                    Mensagem = "A página que está procurando não existe! <br />Em caso de dúvidas entre em contato com nosso suporte",
+                    Titulo = "Ops! Página não encontrada.",
+                    ErroCode = id,
+                }),
+
+                403 => View("Error", new ErrorViewModel
+                {
+                    Mensagem = "Você não tem permissão para fazer isto.",
+                    Titulo = "Acesso Negado",
+                    ErroCode = id,
+                }),
+
+                _ => StatusCode(404)
+            };
         }
     }
 }

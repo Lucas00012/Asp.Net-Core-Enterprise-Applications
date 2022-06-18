@@ -23,21 +23,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamento", "Pagamento", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pedido", "Pedido", "{EFDEBC96-CB0E-4C25-B3AE-2E6985C64AFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Core", "src\building blocks\NSE.Core\NSE.Core.csproj", "{77CA46F5-84D1-4023-97F1-944F965B77B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Core", "src\building blocks\NSE.Core\NSE.Core.csproj", "{77CA46F5-84D1-4023-97F1-944F965B77B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.WebApp.MVC", "src\web\NSE.WebApp.MVC\NSE.WebApp.MVC.csproj", "{D48EEE6A-EADC-4FBF-B2B2-272EC73CA01C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.WebApp.MVC", "src\web\NSE.WebApp.MVC\NSE.WebApp.MVC.csproj", "{D48EEE6A-EADC-4FBF-B2B2-272EC73CA01C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Carrinho.API", "src\services\NSE.Carrinho.API\NSE.Carrinho.API.csproj", "{7EB01803-0A84-4D1C-8DEE-270F1ECA1FA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Catalogo.API", "src\services\NSE.Catalogo.API\NSE.Catalogo.API.csproj", "{4E27700F-5F03-49CE-825A-B811F0C0A0B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Catalogo.API", "src\services\NSE.Catalogo.API\NSE.Catalogo.API.csproj", "{4E27700F-5F03-49CE-825A-B811F0C0A0B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Cliente.API", "src\services\NSE.Cliente.API\NSE.Cliente.API.csproj", "{695AFC2F-1292-47EC-A424-E864E4366F4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Cliente.API", "src\services\NSE.Cliente.API\NSE.Cliente.API.csproj", "{695AFC2F-1292-47EC-A424-E864E4366F4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Identidade.API", "src\services\NSE.Identidade.API\NSE.Identidade.API.csproj", "{FCD359FB-5982-4788-BD2B-4FEFE21A2F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Identidade.API", "src\services\NSE.Identidade.API\NSE.Identidade.API.csproj", "{FCD359FB-5982-4788-BD2B-4FEFE21A2F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pagamento.API", "src\services\NSE.Pagamento.API\NSE.Pagamento.API.csproj", "{380FC7AC-4746-45B7-A33C-4E4E3E10CDB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pagamento.API", "src\services\NSE.Pagamento.API\NSE.Pagamento.API.csproj", "{380FC7AC-4746-45B7-A33C-4E4E3E10CDB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pedido.API", "src\services\NSE.Pedido.API\NSE.Pedido.API.csproj", "{FDCBCB12-5553-4E3D-9755-4FEEDAC18FCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedido.API", "src\services\NSE.Pedido.API\NSE.Pedido.API.csproj", "{FDCBCB12-5553-4E3D-9755-4FEEDAC18FCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.WebAPI.Core", "src\building blocks\NSE.WebAPI.Core\NSE.WebAPI.Core.csproj", "{912C9803-95E6-4C3A-AED0-B849F9A9E87B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{FDCBCB12-5553-4E3D-9755-4FEEDAC18FCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDCBCB12-5553-4E3D-9755-4FEEDAC18FCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDCBCB12-5553-4E3D-9755-4FEEDAC18FCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912C9803-95E6-4C3A-AED0-B849F9A9E87B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912C9803-95E6-4C3A-AED0-B849F9A9E87B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912C9803-95E6-4C3A-AED0-B849F9A9E87B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912C9803-95E6-4C3A-AED0-B849F9A9E87B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{FCD359FB-5982-4788-BD2B-4FEFE21A2F9A} = {E8440A2D-EF78-48F6-8942-B3706490FD7F}
 		{380FC7AC-4746-45B7-A33C-4E4E3E10CDB9} = {88116F6A-B408-46BB-9D73-8D896DDFF303}
 		{FDCBCB12-5553-4E3D-9755-4FEEDAC18FCE} = {EFDEBC96-CB0E-4C25-B3AE-2E6985C64AFE}
+		{912C9803-95E6-4C3A-AED0-B849F9A9E87B} = {8DBA75A7-2AA1-499E-ABC7-760C61C1BA29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8188A1F4-B661-4574-8590-96C51CA5E681}
