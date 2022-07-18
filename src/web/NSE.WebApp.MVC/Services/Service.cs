@@ -1,4 +1,6 @@
-﻿using NSE.WebApp.MVC.Common.Exceptions;
+﻿using NSE.Core.Communication;
+using NSE.WebApp.MVC.Common.Exceptions;
+using NSE.WebApp.MVC.Models;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -41,6 +43,11 @@ namespace NSE.WebApp.MVC.Services
             response.EnsureSuccessStatusCode();
 
             return true;
+        }
+
+        protected ResponseResult RetornoOk()
+        {
+            return new ResponseResult();
         }
     }
 }

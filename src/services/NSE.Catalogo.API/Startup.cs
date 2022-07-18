@@ -24,7 +24,7 @@ namespace NSE.Catalogo.API
 
             services.AddSwaggerConfiguration();
 
-            services.RegisterServices();
+            services.RegisterServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

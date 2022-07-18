@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NSE.Core.Messages.Integration;
 using NSE.Identidade.API.Models;
 using NSE.Identidade.API.Services;
+using NSE.MessageBus;
+using NSE.WebAPI.Core.Controllers;
 
 namespace NSE.Identidade.API.Controllers
 {
@@ -11,12 +14,14 @@ namespace NSE.Identidade.API.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly JwtTokenService _jwtTokenService;
+        private readonly IMessageBus _bus;
 
-        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, JwtTokenService jwtTokenService)
+        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, JwtTokenService jwtTokenService, IMessageBus bus)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtTokenService = jwtTokenService;
+            _bus = bus;
         }
 
         [HttpPost("nova-conta")]
@@ -33,8 +38,16 @@ namespace NSE.Identidade.API.Controllers
 
             if (!result.Succeeded)
             {
-                AdicionarErros(result.Errors.Select(e => e.Description));
+                AdicionarErrosProcessamento(result.Errors);
                 return CustomResponse();
+            }
+
+            var clienteResult = await RegistrarCliente(usuarioRegistro);
+
+            if (!clienteResult.ValidationResult.IsValid)
+            {
+                await _userManager.DeleteAsync(user);
+                return CustomResponse(clienteResult.ValidationResult);
             }
 
             var token = await _jwtTokenService.GerarJwt(user);
@@ -49,13 +62,13 @@ namespace NSE.Identidade.API.Controllers
 
             if (result.IsLockedOut)
             {
-                AdicionarErro("Usuário temporariamente bloqueado por tentativas inválidas");
+                AdicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválidas");
                 return CustomResponse();
             }
 
             if (!result.Succeeded)
             {
-                AdicionarErro("Usuário ou senha incorretos");
+                AdicionarErroProcessamento("Usuário ou senha incorretos");
                 return CustomResponse();
             }
 
@@ -63,6 +76,24 @@ namespace NSE.Identidade.API.Controllers
             var token = await _jwtTokenService.GerarJwt(user);
 
             return CustomResponse(token);
+        }
+
+        private async Task<ResponseMessage> RegistrarCliente(UsuarioRegistro usuarioRegistro)
+        {
+            var usuario = await _userManager.FindByEmailAsync(usuarioRegistro.Email);
+
+            var usuarioRegistrado = new UsuarioRegistradoIntegrationEvent(
+                Guid.Parse(usuario.Id), usuarioRegistro.Nome, usuarioRegistro.Email, usuarioRegistro.Cpf);
+
+            try
+            {
+                return await _bus.RequestAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(usuarioRegistrado);
+            }
+            catch
+            {
+                await _userManager.DeleteAsync(usuario);
+                throw;
+            }
         }
     }
 }

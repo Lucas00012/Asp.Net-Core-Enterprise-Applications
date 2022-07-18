@@ -1,4 +1,4 @@
-﻿using NSE.WebApp.MVC.Common.User;
+﻿using NSE.WebAPI.Core.Usuario;
 using NSE.WebApp.MVC.Configuration;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Services;
@@ -13,18 +13,42 @@ namespace NSE.WebApp.MVC.Infrastructure.StartupConfig
         {
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
-            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
+            //services.AddHttpClient<ICatalogoService, CatalogoService>()
+            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            //services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
+            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            //services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
-                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IComprasBffService, ComprasBffService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IClienteService, ClienteService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
             var baseUrlsConfigSection = configuration.GetSection("BaseUrlsConfig");
-            var baseUrlsConfig = baseUrlsConfigSection.Get<BaseUrlsConfiguration>();
             services.Configure<BaseUrlsConfiguration>(baseUrlsConfigSection);
 
             #region Refit

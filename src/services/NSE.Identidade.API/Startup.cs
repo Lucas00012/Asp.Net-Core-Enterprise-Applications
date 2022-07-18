@@ -15,7 +15,7 @@ namespace NSE.Identidade.API
         {
             services.AddIdentityConfiguration(Configuration);
 
-            services.AddServicesConfiguration();
+            services.RegisterServices(Configuration);
 
             services.AddApiConfiguration();
 

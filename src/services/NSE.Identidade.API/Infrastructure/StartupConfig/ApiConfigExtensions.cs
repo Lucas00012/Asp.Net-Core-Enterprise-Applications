@@ -5,13 +5,6 @@ namespace NSE.Identidade.API.Infrastructure.StartupConfig
 {
     public static class ApiConfigExtensions
     {
-        public static IServiceCollection AddServicesConfiguration(this IServiceCollection services)
-        {
-            services.AddScoped<JwtTokenService>();
-
-            return services;
-        }
-
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services)
         {
             services.AddControllers()

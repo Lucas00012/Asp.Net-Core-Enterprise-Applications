@@ -4,8 +4,9 @@ namespace NSE.Catalogo.API.Models
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
-        Task<IEnumerable<Produto>> ObterTodos();
+        Task<PagedResult<Produto>> ObterTodos(int pageSize, int pageIndex, string query = null);
         Task<Produto> ObterPorId(Guid id);
+        Task<List<Produto>> ObterProdutosPorId(IEnumerable<Guid> ids);
 
         void Adicionar(Produto produto);
         void Atualizar(Produto produto);

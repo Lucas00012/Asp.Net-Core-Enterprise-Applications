@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace NSE.WebAPI.Core.Identidade
 {
@@ -20,6 +21,7 @@ namespace NSE.WebAPI.Core.Identidade
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(opt =>
             {
+                opt.MapInboundClaims = false;
                 opt.RequireHttpsMetadata = true;
                 opt.SaveToken = true;
                 opt.TokenValidationParameters = new TokenValidationParameters
